@@ -1,7 +1,7 @@
 {% extends 'base.html' %}
 {% load static %}
 
-{% block title %} | {{video.title}} {%endblock %}
+{% block title %} | {{movie.title}} {%endblock %}
 
 {% block content %}
 
@@ -17,8 +17,10 @@
     poster="MY_VIDEO_POSTER.jpg"
     data-setup="{}"
   >
-    <source src="{{MEDIA_URL}}{{video.media}}" type="video/mp4"></source>
-    <track label="Spanish" kind="subtitles" srclang="es" src="{{MEDIA_URL}}{{video.subtitles}}" default>
+    <source src="{{MEDIA_URL}}{{movie.media}}" type="video/mp4"></source>
+    {% for subtitle in movie.subtitles.all %}
+      <track label="{{subtitle.language}}" kind="subtitles" srclang="{{subtitle.language}}" src="{{MEDIA_URL}}{{subtitle.text}}" default>
+    {% endfor %}
   </video>
 
 

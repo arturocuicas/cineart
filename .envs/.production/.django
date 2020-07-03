@@ -15,14 +15,14 @@ DJANGO_SECURE_SSL_REDIRECT=False
 # ------------------------------------------------------------------------------
 DJANGO_SERVER_EMAIL=
 
-SENDGRID_API_KEY=
+SENDGRID_API_KEY=[GENERATE OUR OWH HASH]
 SENDGRID_GENERATE_MESSAGE_ID=True
 SENDGRID_MERGE_FIELD_FORMAT=None
 
 
 # django-allauth
 # ------------------------------------------------------------------------------
-DJANGO_ACCOUNT_ALLOW_REGISTRATION=True
+DJANGO_ACCOUNT_ALLOW_REGISTRATION=False
 
 # Gunicorn
 # ------------------------------------------------------------------------------

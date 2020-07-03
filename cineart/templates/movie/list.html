@@ -10,14 +10,14 @@
 <hr />
 
 <div class="card-columns">
-  {% for video in videos %}
+  {% for movie in movies %}
   <div class="card">
-    <img src="{{MEDIA_URL}}{{video.thumbsnail}}" alt="" class="card-img-top" />
+    <img src="{{MEDIA_URL}}{{movie.poster}}" alt="" class="card-img-top" />
     <div class="card-body">
       <h4 class="card-title">
-        <a href="{% url 'detail-movie' video.id %}">{{video.title}}</a>
+        <a href="{% url 'detail-movie' movie.id %}">{{movie.title}}</a>
       </h4>
-      <p class="card-text">{{video.description}}</p>
+      <p class="card-text">{{movie.description}}</p>
     </div>
   </div>
   {% endfor %}
