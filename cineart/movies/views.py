@@ -6,11 +6,11 @@ from cineart.movies.models import Movie
 def list_movies(request):
     "List of Movies view"
 
-    Movies = Movie.objects.all()
+    movies = Movie.objects.all()
 
     context = {
         "title": "Billboard",
-        "Movies": Movies
+        "movies": movies
     }
 
     return render(request, "movie/list.html", context)
@@ -19,10 +19,10 @@ def list_movies(request):
 def detail_movie(request, pk):
     """Detail of a movie View"""
 
-    Movie = Movie.objects.get(id=pk)
+    movie = Movie.objects.get(id=pk)
 
     context = {
-        "Movie": Movie
+        "movie": movie
     }
 
     return render(request, "movie/detail.html", context)
