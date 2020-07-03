@@ -2,8 +2,8 @@
 # ------------------------------------------------------------------------------
 # DJANGO_READ_DOT_ENV_FILE=True
 DJANGO_SETTINGS_MODULE=config.settings.production
-DJANGO_SECRET_KEY=3fnFkZ8GKXKMhzs00TJZh4Y1M7xTIabHzaKqjNjEu8ctlyaxxiR6vtVO533dHdPP
-DJANGO_ADMIN_URL=wCTZKFxpm5E7jFK0P214bYjD8F5hPqrj/
+DJANGO_SECRET_KEY=[GENERATE OUR OWH HASH]
+DJANGO_ADMIN_URL=[GENERATE OUR OWH HASH]/
 DJANGO_ALLOWED_HOSTS=.cineart.pw
 
 # Security

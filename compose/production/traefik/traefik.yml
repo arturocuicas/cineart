@@ -44,6 +44,11 @@ http:
       redirectScheme:
         scheme: https
         permanent: true
+    limit:
+      buffering:
+        maxRequestBodyBytes: 4000000000
+        memRequestBodyBytes: 4000000000
+        maxResponseBodyBytes: 4000000000
     csrf:
       headers:
         hostsProxyHeaders: ["X-CSRFToken"]
