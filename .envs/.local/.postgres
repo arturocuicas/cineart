@@ -1,0 +1,7 @@
+# PostgreSQL
+# ------------------------------------------------------------------------------
+POSTGRES_HOST=postgres
+POSTGRES_PORT=5432
+POSTGRES_DB=cineart
+POSTGRES_USER=DLdZTfKQAcGsVkBGhgFmXYUkfpJpKWan
+POSTGRES_PASSWORD=XKKo8cBsn1CGLx8e4cUVKngFR2OnYT0dx39iHm6STNbuxXva7yv5XIkEFl5TZGrx
