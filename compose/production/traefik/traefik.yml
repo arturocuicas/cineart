@@ -3,20 +3,16 @@ log:
 
 entryPoints:
   web:
-    # http
     address: ":80"
 
   web-secure:
-    # https
     address: ":443"
 
 certificatesResolvers:
   letsencrypt:
-    # https://docs.traefik.io/master/https/acme/#lets-encrypt
     acme:
-      email: "orutrax@gmail.com"
+      email: "arturo@cineart.pw"
       storage: /etc/traefik/acme/acme.json
-      # https://docs.traefik.io/master/https/acme/#httpchallenge
       httpChallenge:
         entryPoint: web
 
@@ -24,7 +20,7 @@ http:
   routers:
     web-router:
       rule: "Host(`cineart.pw`) || Host(`www.cineart.pw`)"
-      
+
       entryPoints:
         - web
       middlewares:
@@ -34,25 +30,21 @@ http:
 
     web-secure-router:
       rule: "Host(`cineart.pw`) || Host(`www.cineart.pw`)"
-      
+
       entryPoints:
         - web-secure
       middlewares:
         - csrf
       service: django
       tls:
-        # https://docs.traefik.io/master/routing/routers/#certresolver
         certResolver: letsencrypt
 
   middlewares:
     redirect:
-      # https://docs.traefik.io/master/middlewares/redirectscheme/
       redirectScheme:
         scheme: https
         permanent: true
     csrf:
-      # https://docs.traefik.io/master/middlewares/headers/#hostsproxyheaders
-      # https://docs.djangoproject.com/en/dev/ref/csrf/#ajax
       headers:
         hostsProxyHeaders: ["X-CSRFToken"]
 
@@ -63,7 +55,6 @@ http:
           - url: http://django:5000
 
 providers:
-  # https://docs.traefik.io/master/providers/file/
   file:
     filename: /etc/traefik/traefik.yml
     watch: true
