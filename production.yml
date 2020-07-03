@@ -39,12 +39,14 @@ services:
     depends_on:
       - django
     volumes:
+      - /var/run/docker.sock:/var/run/docker.sock:ro
       - production_traefik:/etc/traefik/acme
       - /etc/localtime:/etc/localtime:ro
       - /etc/timezone:/etc/timezone:ro
     ports:
-      - "0.0.0.0:80:80"
-      - "0.0.0.0:443:443"
+      - "80:80"
+      - "8080:8080"
+      - "443:443"
 
   redis:
     image: redis:5-alpine
