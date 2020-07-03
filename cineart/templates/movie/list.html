@@ -13,6 +13,8 @@
   {% for movie in movies %}
   <div class="card">
     <img src="{{ movie.poster }}" alt="" class="card-img-top" />
+    <img src="{{ movie.poster.url }}" alt="" class="card-img-top" />
+    <img src="{{ MEDIA_URL }}{{ movie.poster }}" alt="" class="card-img-top" />
     <div class="card-body">
       <h4 class="card-title">
         <a href="{% url 'detail-movie' movie.id %}">{{movie.title}}</a>
