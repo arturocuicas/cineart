@@ -1,0 +1,25 @@
+{% extends 'base.html' %}
+{% load static %}
+
+{% block title %} | {{video.title}} {%endblock %}
+
+{% block content %}
+
+    <h2>{{video.title}}</h2>
+
+    <video
+    id="my-video"
+    class="video-js"
+    controls
+    preload="auto"
+    width="640"
+    height="264"
+    poster="MY_VIDEO_POSTER.jpg"
+    data-setup="{}"
+  >
+    <source src="{{MEDIA_URL}}{{video.media}}" type="video/mp4"></source>
+    <track label="Spanish" kind="subtitles" srclang="es" src="{{MEDIA_URL}}{{video.subtitles}}" default>
+  </video>
+
+
+{% endblock %}

@@ -11,3 +11,11 @@
   background-color: #f2dede;
   border-color: #eed3d7;
 }
+
+body {
+  background-color: rgb(30, 30, 30);
+}
+
+* {
+  color: #bebebe;
+}
