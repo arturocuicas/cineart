@@ -5,7 +5,13 @@
 
 {% block content %}
 
-    <h2>{{video.title}}</h2>
+    <div class="col-12">
+      <div class="row">
+        <h2 style="padding-top: 20px;">{{movie.title}}</h2>
+      </div>
+    </div>
+
+    <hr />
 
     <video
     id="my-video"
@@ -23,5 +29,8 @@
     {% endfor %}
   </video>
 
+  <br />
+
+  <p>{{movie.description}}</p>
 
 {% endblock %}
