@@ -5,6 +5,7 @@ volumes:
   production_postgres_data_backups: {}
   production_traefik: {}
   dataredis:
+  django_media:
 
 services:
   django:
@@ -12,6 +13,8 @@ services:
       context: .
       dockerfile: ./compose/production/django/Dockerfile
     image: cineart_production_django
+    volumes:
+      - django_media:/app/cineart/media
     depends_on:
       - postgres
       - redis
