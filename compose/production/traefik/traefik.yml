@@ -62,5 +62,5 @@ http:
 providers:
   file:
     filename: /etc/traefik/traefik.yml
-    directory: /app/cineart/media
+    directory: /etc/traefik/media
     watch: true
