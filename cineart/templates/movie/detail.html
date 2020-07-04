@@ -14,12 +14,12 @@
     preload="auto"
     width="640"
     height="264"
-    poster="{% static movie.poster %}"
+    poster="{{ MEDIA_URL }}{{ movie.poster }}"
     data-setup="{}"
   >
-    <source src="{% static movie.video %}" type="video/mp4"></source>
+    <source src="{{ MEDIA_URL }}{{ movie.video }}" type="video/mp4"></source>
     {% for subtitle in movie.subtitles.all %}
-      <track label="{{subtitle.language}}" kind="subtitles" srclang="{{subtitle.language}}" src="{% static subtitle.text %}" default>
+      <track label="{{subtitle.language}}" kind="subtitles" srclang="{{subtitle.language}}" src="{{ MEDIA_URL }}{{ subtitle.text }}" default>
     {% endfor %}
   </video>
 

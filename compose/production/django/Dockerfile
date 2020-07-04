@@ -33,9 +33,9 @@ RUN chmod +x /start
 RUN chown django /start
 COPY --chown=django:django . /app
 
-RUN mkdir -p /app/cineart/media
-
 USER django
+
+RUN mkdir -p /app/cineart/media
 
 WORKDIR /app
 

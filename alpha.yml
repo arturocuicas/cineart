@@ -1,0 +1,91 @@
+version: "3.7"
+
+volumes:
+  production_postgres_data: {}
+  production_postgres_data_backups: {}
+  production_traefik: {}
+  dataredis:
+  media_volume:
+  static_volume:
+
+services:
+  traefik:
+    build:
+      context: .
+      dockerfile: "./compose/production/traefik/Dockerfile"
+    image: cineart_production_traefik
+    depends_on:
+      - django
+    ports:
+      - "80:80"
+      - "443:443"
+      - "8080:8080"
+    restart: unless-stopped
+    volumes:
+      - /var/run/docker.sock:/var/run/docker.sock:ro
+      - /etc/localtime:/etc/localtime:ro
+      - /etc/timezone:/etc/timezone:ro
+      - ./compose/production/traefik/traefik.toml:/etc/traefik/traefik.toml:ro
+      - ./compose/production/traefik/traefik_dynamic.toml:/etc/traefik/traefik_dynamic.toml:ro
+      - ./compose/production/traefik/acme.json:/acme.json
+
+  django:
+    build:
+      context: .
+      dockerfile: "./compose/production/django/Dockerfile"
+    image: "cineart_production_django"
+    volumes:
+      - static_volume:/app/cineart/static
+      - media_volume:/app/cineart/media
+    expose:
+      - "8000"
+    depends_on:
+      - postgres
+      - redis
+    env_file:
+      - ./.envs/.production/.django
+      - ./.envs/.production/.postgres
+    command: /start
+
+  postgres:
+    build:
+      context: .
+      dockerfile: ./compose/production/postgres/Dockerfile
+    image: postgres:12.0-alpine
+    volumes:
+      - production_postgres_data:/var/lib/postgresql/data
+      - production_postgres_data_backups:/backups
+    env_file:
+      - ./.envs/.production/.postgres
+
+  nginx:
+    image: nginx:1.17-alpine
+    restart: unless-stopped
+    volumes:
+      - /etc/localtime:/etc/localtime:ro
+      - /etc/timezone:/etc/timezone:ro
+      - static_volume:/var/www/html/static
+      - media_volume:/var/www/html/media
+      - ./compose/production/nginx:/etc/nginx/
+    depends_on:
+      - "django"
+    # links:
+    #  - django
+    labels:
+      traefik.enable: true
+      traefik.http.routers.nginxwp-http.rule: "Host(`cineart.pw`)"
+      traefik.http.routers.nginxwp-http.entrypoints: "web"
+      traefik.http.routers.nginxwp-http.middlewares: "https-redirect@file"
+      traefik.http.routers.nginxwp-https.rule: "Host(`cineart.pw`)"
+      traefik.http.routers.nginxwp-https.entrypoints: "websecure"
+      traefik.http.routers.nginxwp-https.middlewares: "security@file, compression@file"
+      traefik.http.routers.nginxwp-https.tls: "true"
+      traefik.http.routers.nginxwp-https.tls.certresolver: "letsencrypt"
+
+  redis:
+    image: redis:5-alpine
+    restart: unless-stopped
+    volumes:
+      - dataredis:/data
+    labels:
+      traefik.enable: false
