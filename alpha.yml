@@ -81,6 +81,7 @@ services:
       traefik.http.routers.nginxwp-https.middlewares: "security@file, compression@file"
       traefik.http.routers.nginxwp-https.tls: "true"
       traefik.http.routers.nginxwp-https.tls.certresolver: "letsencrypt"
+      traefik.http.middlewares.csfr.headers.hostsProxyHeaders: "X-CSRFToken"
 
   redis:
     image: redis:5-alpine
