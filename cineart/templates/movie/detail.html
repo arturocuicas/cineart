@@ -14,19 +14,19 @@
     <hr />
 
     <video
-    id="my-video"
-    class="video-js"
-    controls
-    preload="auto"
-    width="640"
-    height="264"
-    poster="{{ MEDIA_URL }}{{ movie.poster }}"
-    data-setup="{}"
-  >
-    <source src="{{ MEDIA_URL }}{{ movie.video }}" type="video/mp4"></source>
-    {% for subtitle in movie.subtitles.all %}
-      <track label="{{subtitle.language}}" kind="subtitles" srclang="{{subtitle.language}}" src="{{ MEDIA_URL }}{{ subtitle.text }}" default>
-    {% endfor %}
+      id="my-video"
+      class="video-js vjs-default-skin vjs-fluid"
+      controls
+      preload="auto"
+      width="640"
+      height="264"
+      poster="{{ MEDIA_URL }}{{ movie.poster }}"
+      data-setup="{'fluid': true}"
+    >
+      <source src="{{ MEDIA_URL }}{{ movie.video }}" type="video/mp4"></source>
+      {% for subtitle in movie.subtitles.all %}
+        <track label="{{subtitle.language}}" kind="subtitles" srclang="{{subtitle.language}}" src="{{ MEDIA_URL }}{{ subtitle.text }}" default>
+      {% endfor %}
   </video>
 
   <br />
