@@ -69,8 +69,8 @@ services:
       - ./compose/production/nginx:/etc/nginx/
     depends_on:
       - "django"
-    links:
-      - django
+    # links:
+    #   - django
     labels:
       traefik.enable: true
       traefik.http.routers.nginxwp-http.rule: "Host(`cineart.pw`)"
